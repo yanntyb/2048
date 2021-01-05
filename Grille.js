@@ -5,13 +5,13 @@ function Grille (length){
 
 let tabSlot;
 let tabRow;
-let slot = [];
+let slotTab = [];
 let nbSlot = -1;
 
 Grille.prototype.initTab = function (){
-    let grille = document.createElement("div");
-    grille.id = "grille";
-    tabRow = []
+    this.grille = document.createElement("div");
+    this.grille.id = "grille";
+    tabRow = [];
     for(let row = 0; row < this.length;row++){
         let divRow = document.createElement("div");
         divRow.className = "row";
@@ -20,57 +20,102 @@ Grille.prototype.initTab = function (){
         tabSlot = [];
         for(let slot = 0; slot <this.length; slot++){
             let divSlot = document.createElement("div");
-            divSlot.className = "slot";
+            divSlot.className = "slot " + slot + " " +  row;
             divSlot.style.height = "100%";
             divSlot.style.width = (100/this.length) + "%";
             divRow.append(divSlot);
             tabSlot.push(divSlot);
         }
-        grille.append(divRow);
+        this.grille.append(divRow);
         tabRow.push([tabSlot]);
     }
-    document.body.append(grille);
+    document.body.append(this.grille);
 }
 
-Grille.prototype.initSlot = function (){
-    let randomSlot = this.randomNumber();
-    let randomRow = this.randomNumber();
-    nbSlot++;
-    while(true){
-        let selectedSlot = tabRow[randomRow][0][randomSlot]
-        if(slot.length > nbSlot){
-            break;
-        }
-        else{
-            if(selectedSlot.innerHTML === ""){
-                selectedSlot.innerHTML = 2;
-                console.log(selectedSlot);
-                slot.push(selectedSlot);
-                this.colorUsedSlot(selectedSlot)
-
+Grille.prototype.initSlot = function (place, pos){
+    if(place){
+        let selectedSlot = tabRow[pos[0]][0][pos[1]]
+        selectedSlot.innerHTML = 2;
+        slotTab.push(selectedSlot);
+        this.colorUsedSlot(selectedSlot);
+        this.tabUsed.push(selectedSlot);
+    }
+    else{
+        let randomSlot = this.randomNumber();
+        let randomRow = this.randomNumber();
+        while(true){
+            let selectedSlot = tabRow[randomRow][0][randomSlot]
+            if(slotTab.length > nbSlot){
+                break;
             }
             else{
-                randomSlot = this.randomNumber();
-                randomRow = this.randomNumber();
+                if(selectedSlot.innerHTML === ""){
+                    selectedSlot.innerHTML = 2;
+                    slotTab.push(selectedSlot);
+                    this.colorUsedSlot(selectedSlot);
+                    this.tabUsed.push(selectedSlot);
+                }
+                else{
+                    randomSlot = this.randomNumber();
+                    randomRow = this.randomNumber();
+                }
             }
         }
     }
 }
 
+Grille.prototype.moveLeft = function (){
+    for(let slot of this.tabUsed){
+        console.log("slot",slot);
+        let pos = slot.className.split(" ")[1];
+        let row = slot.className.split(" ")[2];
+        let index = this.tabUsed.indexOf(slot);
+        while(pos >0){
+            slot.innerHTML = "";
+            resetColor(slot);
+            pos--
+            slot.className = "slot " + pos + " " + row;
+        }
+        this.tabUsed.splice(index,1);
+        this.initSlot(true,[row,pos])
+    }
+}
 
+function resetColor(div){
+    div.style.backgroundColor = "white";
+}
 
 Grille.prototype.randomNumber = function (){
-    let random = Math.trunc(Math.random() * (this.length-1));
-    return random
+    return Math.trunc(Math.random() * (this.length))
 }
 
 Grille.prototype.newSlot = function (){
+    nbSlot++;
+    this.initSlot();
+}
+
+Grille.prototype.move = function (){
     let _this = this
-    document.addEventListener("click",_this.initSlot());
+    window.addEventListener("keydown",function(e){
+        if(e.key === "ArrowRight"){
+            console.log("droite")
+        }
+        else if(e.key === "ArrowLeft"){
+            _this.moveLeft()
+        }
+        else if(e.key === "ArrowUp"){
+            console.log("up")
+        }
+        else if(e.key === "ArrowDown"){
+            console.log("down")
+        }
+    })
 }
 
 Grille.prototype.colorUsedSlot = function (slot){
     slot.style.backgroundColor = "burlywood";
 }
+
+
 
 export {Grille}
