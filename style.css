@@ -1,0 +1,42 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+htlm {
+    font-size: 62.5%;
+}
+
+body{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#grille {
+    width: 40vh;
+    height: 40vh;
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    border: 3px solid darkseagreen;
+}
+
+.slot {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    color: indianred;
+    font-size: 2rem;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
