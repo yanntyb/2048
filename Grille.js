@@ -6,7 +6,7 @@ function Grille (length){
 let tabSlot;
 let tabRow;
 let slotTab = [];
-let nbSlot = -1;
+let nbSlot = 0
 
 Grille.prototype.initTab = function (){
     this.grille = document.createElement("div");
@@ -45,7 +45,7 @@ Grille.prototype.initSlot = function (place, pos){
         let randomRow = this.randomNumber();
         while(true){
             let selectedSlot = tabRow[randomRow][0][randomSlot]
-            if(slotTab.length > nbSlot){
+            if(slotTab.length > nbSlot -1){
                 break;
             }
             else{
