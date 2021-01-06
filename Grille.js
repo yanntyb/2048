@@ -65,9 +65,8 @@ Grille.prototype.initSlot = function (place, pos){
 }
 
 Grille.prototype.moveLeft = function (){
+    console.log(this.tabUsed)
     for(let slot of this.tabUsed){
-        console.log("slot",slot);
-        console.log(this.tabUsed)
         let pos = slot.className.split(" ")[1];
         let row = slot.className.split(" ")[2];
         let index = this.tabUsed.indexOf(slot);
@@ -77,8 +76,9 @@ Grille.prototype.moveLeft = function (){
             pos--
             slot.className = "slot " + pos + " " + row;
         }
-        this.initSlot(true,[row,pos])
         this.tabUsed.splice(index,1);
+        this.newSlot(true,[row,pos]);
+
     }
 }
 
@@ -86,9 +86,9 @@ Grille.prototype.randomNumber = function (){
     return Math.trunc(Math.random() * (this.length))
 }
 
-Grille.prototype.newSlot = function (){
+Grille.prototype.newSlot = function (place, pos){
     nbSlot++;
-    this.initSlot();
+    this.initSlot(place, pos);
 }
 
 Grille.prototype.move = function (){
@@ -98,7 +98,8 @@ Grille.prototype.move = function (){
             console.log("droite")
         }
         else if(e.key === "ArrowLeft"){
-            _this.moveLeft()
+            _this.moveLeft();
+            _this.newSlot(false);
         }
         else if(e.key === "ArrowUp"){
             console.log("up")
