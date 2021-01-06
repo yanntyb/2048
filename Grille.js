@@ -65,8 +65,9 @@ Grille.prototype.initSlot = function (place, pos){
 }
 
 Grille.prototype.moveLeft = function (){
-    console.log(this.tabUsed);
+    console.log("tab",this.tabUsed);
     for(let slot of this.tabUsed){
+        console.log("slot",slot)
         let pos = slot.className.split(" ")[1];
         let row = slot.className.split(" ")[2];
         let index = this.tabUsed.indexOf(slot);
@@ -76,6 +77,7 @@ Grille.prototype.moveLeft = function (){
             pos--;
             slot.className = "slot " + pos + " " + row;
         }
+        nbSlot--
         this.tabUsed.splice(index,1);
         this.newSlot(true,[row,pos]);
     }
@@ -86,9 +88,7 @@ Grille.prototype.randomNumber = function (){
 }
 
 Grille.prototype.newSlot = function (place, pos){
-    if(!place){
-        nbSlot++;
-    }
+    nbSlot++
     console.log(nbSlot)
     this.initSlot(place, pos);
 }
