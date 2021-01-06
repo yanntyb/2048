@@ -66,12 +66,12 @@ Grille.prototype.initSlot = function (place, pos){
 
 Grille.prototype.moveLeft = function (){
     let tabTampon = this.tabUsed;
-    console.log("tampon",tabTampon)
-    for(let slot of tabTampon){
+    for(let slot of this.tabUsed){
+        console.log("tampon",this.tabUsed);
         console.log("slot",slot);
         let pos = slot.className.split(" ")[1];
         let row = slot.className.split(" ")[2];
-        let index = tabTampon.indexOf(slot);
+        let index = this.tabUsed.indexOf(slot);
         while(pos >0){
             slot.innerHTML = "";
             resetColor(slot);
@@ -79,8 +79,9 @@ Grille.prototype.moveLeft = function (){
             slot.className = "slot " + pos + " " + row;
         }
         this.initSlot(true,[row,pos])
-        this.tabUsed.splice(index,1);
+        tabTampon.splice(index,1);
     }
+    this.tabUsed = tabTampon;
 }
 
 Grille.prototype.randomNumber = function (){
