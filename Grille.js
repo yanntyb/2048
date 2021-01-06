@@ -65,13 +65,12 @@ Grille.prototype.initSlot = function (place, pos){
 }
 
 Grille.prototype.moveLeft = function (){
-    console.log("tab",this.tabUsed);
-    for(let slot of this.tabUsed){
+    for(let slot of Array.from(this.tabUsed)){
         console.log("slot",slot)
         let pos = slot.className.split(" ")[1];
         let row = slot.className.split(" ")[2];
         let index = this.tabUsed.indexOf(slot);
-        while(pos >0){
+        while(pos > 0){
             slot.innerHTML = "";
             resetColor(slot);
             pos--;
@@ -84,8 +83,7 @@ Grille.prototype.moveLeft = function (){
 }
 
 Grille.prototype.moveRight = function (){
-    console.log("tab",this.tabUsed);
-    for(let slot of this.tabUsed){
+    for(let slot of Array.from(this.tabUsed)){
         console.log("slot",slot)
         let pos = slot.className.split(" ")[1];
         let row = slot.className.split(" ")[2];
@@ -103,8 +101,7 @@ Grille.prototype.moveRight = function (){
 }
 
 Grille.prototype.moveUp = function (){
-    console.log("tab",this.tabUsed);
-    for(let slot of this.tabUsed){
+    for(let slot of Array.from(this.tabUsed)){
         console.log("slot",slot)
         let pos = slot.className.split(" ")[1];
         let row = slot.className.split(" ")[2];
@@ -122,8 +119,7 @@ Grille.prototype.moveUp = function (){
 }
 
 Grille.prototype.moveDown = function (){
-    console.log("tab",this.tabUsed);
-    for(let slot of this.tabUsed){
+    for(let slot of Array.from(this.tabUsed)){
         console.log("slot",slot)
         let pos = slot.className.split(" ")[1];
         let row = slot.className.split(" ")[2];
