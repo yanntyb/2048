@@ -77,7 +77,64 @@ Grille.prototype.moveLeft = function (){
             pos--;
             slot.className = "slot " + pos + " " + row;
         }
-        nbSlot--
+        nbSlot--;
+        this.tabUsed.splice(index,1);
+        this.newSlot(true,[row,pos]);
+    }
+}
+
+Grille.prototype.moveRight = function (){
+    console.log("tab",this.tabUsed);
+    for(let slot of this.tabUsed){
+        console.log("slot",slot)
+        let pos = slot.className.split(" ")[1];
+        let row = slot.className.split(" ")[2];
+        let index = this.tabUsed.indexOf(slot);
+        while(pos < this.length - 1){
+            slot.innerHTML = "";
+            resetColor(slot);
+            pos++;
+            slot.className = "slot " + pos + " " + row;
+        }
+        nbSlot--;
+        this.tabUsed.splice(index,1);
+        this.newSlot(true,[row,pos]);
+    }
+}
+
+Grille.prototype.moveUp = function (){
+    console.log("tab",this.tabUsed);
+    for(let slot of this.tabUsed){
+        console.log("slot",slot)
+        let pos = slot.className.split(" ")[1];
+        let row = slot.className.split(" ")[2];
+        let index = this.tabUsed.indexOf(slot);
+        while(row > 0){
+            slot.innerHTML = "";
+            resetColor(slot);
+            row--;
+            slot.className = "slot " + pos + " " + row;
+        }
+        nbSlot--;
+        this.tabUsed.splice(index,1);
+        this.newSlot(true,[row,pos]);
+    }
+}
+
+Grille.prototype.moveDown = function (){
+    console.log("tab",this.tabUsed);
+    for(let slot of this.tabUsed){
+        console.log("slot",slot)
+        let pos = slot.className.split(" ")[1];
+        let row = slot.className.split(" ")[2];
+        let index = this.tabUsed.indexOf(slot);
+        while(row < this.length - 1){
+            slot.innerHTML = "";
+            resetColor(slot);
+            row++;
+            slot.className = "slot " + pos + " " + row;
+        }
+        nbSlot--;
         this.tabUsed.splice(index,1);
         this.newSlot(true,[row,pos]);
     }
@@ -88,8 +145,7 @@ Grille.prototype.randomNumber = function (){
 }
 
 Grille.prototype.newSlot = function (place, pos){
-    nbSlot++
-    console.log(nbSlot)
+    nbSlot++;
     this.initSlot(place, pos);
 }
 
@@ -97,17 +153,17 @@ Grille.prototype.move = function (){
     let _this = this
     window.addEventListener("keydown",function(e){
         if(e.key === "ArrowRight"){
-            console.log("droite")
+            _this.moveRight();
         }
         else if(e.key === "ArrowLeft"){
             _this.moveLeft();
             //_this.newSlot(false);
         }
         else if(e.key === "ArrowUp"){
-            console.log("up")
+            _this.moveUp()
         }
         else if(e.key === "ArrowDown"){
-            console.log("down")
+            _this.moveDown();
         }
     })
 }
@@ -119,6 +175,5 @@ Grille.prototype.colorUsedSlot = function (slot){
 function resetColor(div){
     div.style.backgroundColor = "white";
 }
-
 
 export {Grille}
