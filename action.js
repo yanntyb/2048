@@ -4,4 +4,5 @@ let grille = new Grille(5);
 
 grille.initTab();
 grille.newSlot();
+grille.newSlot();
 grille.move();

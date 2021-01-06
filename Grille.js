@@ -87,7 +87,10 @@ Grille.prototype.randomNumber = function (){
 }
 
 Grille.prototype.newSlot = function (place, pos){
-    nbSlot++;
+    if(!place){
+        nbSlot++;
+    }
+    console.log(nbSlot)
     this.initSlot(place, pos);
 }
 
@@ -99,7 +102,7 @@ Grille.prototype.move = function (){
         }
         else if(e.key === "ArrowLeft"){
             _this.moveLeft();
-            _this.newSlot(false);
+            //_this.newSlot(false);
         }
         else if(e.key === "ArrowUp"){
             console.log("up")
