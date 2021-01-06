@@ -65,24 +65,22 @@ Grille.prototype.initSlot = function (place, pos){
 }
 
 Grille.prototype.moveLeft = function (){
-    for(let slot of this.tabUsed){
+    let tabTampon = this.tabUsed;
+    console.log("tampon",tabTampon)
+    for(let slot of tabTampon){
         console.log("slot",slot);
         let pos = slot.className.split(" ")[1];
         let row = slot.className.split(" ")[2];
-        let index = this.tabUsed.indexOf(slot);
+        let index = tabTampon.indexOf(slot);
         while(pos >0){
             slot.innerHTML = "";
             resetColor(slot);
             pos--
             slot.className = "slot " + pos + " " + row;
         }
-        this.tabUsed.splice(index,1);
         this.initSlot(true,[row,pos])
+        this.tabUsed.splice(index,1);
     }
-}
-
-function resetColor(div){
-    div.style.backgroundColor = "white";
 }
 
 Grille.prototype.randomNumber = function (){
@@ -116,6 +114,9 @@ Grille.prototype.colorUsedSlot = function (slot){
     slot.style.backgroundColor = "burlywood";
 }
 
+function resetColor(div){
+    div.style.backgroundColor = "white";
+}
 
 
 export {Grille}
