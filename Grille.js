@@ -65,7 +65,7 @@ Grille.prototype.initSlot = function (place, pos){
 }
 
 Grille.prototype.moveLeft = function (){
-    console.log(this.tabUsed)
+    console.log(this.tabUsed);
     for(let slot of this.tabUsed){
         let pos = slot.className.split(" ")[1];
         let row = slot.className.split(" ")[2];
@@ -73,12 +73,11 @@ Grille.prototype.moveLeft = function (){
         while(pos >0){
             slot.innerHTML = "";
             resetColor(slot);
-            pos--
+            pos--;
             slot.className = "slot " + pos + " " + row;
         }
         this.tabUsed.splice(index,1);
         this.newSlot(true,[row,pos]);
-
     }
 }
 
